@@ -6,9 +6,9 @@ public class BallTask implements Runnable {
     @Override
     public void run() {
         for (int i = 0; i < 10; i++) { // Generates 10 balls
-            Ball ball = new Ball(sizeGen(), xPosGen(), yPosGen(), colorGen());
-            Thread ballThread = new Thread(ball);
-            ballThread.start();
+            Ball ball = new Ball(sizeGen(), xPosGen(), yPosGen(), colorGen()); //create new ball
+            Thread ballThread = new Thread(ball);// create new ballThread
+            ballThread.start();//start ball Thread
 
             try {
                 Thread.sleep(500); // Small delay between ball creations
@@ -27,14 +27,14 @@ public class BallTask implements Runnable {
     }
 
     private static int yPosGen() {
-        return (int) (Math.random() * 400); // Start at the top
+        return (int) (Math.random() * 400); // y position within canvas height
     }
 
     private String colorGen() {
-        return colorList[(int) (Math.random() * colorList.length)];
+        return colorList[(int) (Math.random() * colorList.length)];// random ball color
     }
 
     public static int gravityGen() {
-        return (int) (Math.random() * 5 + 5);
+        return (int) (Math.random() * 5 + 5);// random gravity
     }
 }

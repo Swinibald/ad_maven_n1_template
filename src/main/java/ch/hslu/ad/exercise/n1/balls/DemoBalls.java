@@ -34,8 +34,7 @@ public final class DemoBalls {
 
     public static void main(final String[] args) {
         Canvas.getCanvas(); // Initialize the canvas
-
-        Thread ballTaskThread = new Thread(new BallTask());
-        ballTaskThread.start();
+        BallTask ballTask = new BallTask();
+        ballTask.run();
     }
 }

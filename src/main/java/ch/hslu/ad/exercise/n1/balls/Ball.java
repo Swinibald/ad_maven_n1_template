@@ -6,7 +6,6 @@ public final class Ball implements Runnable {
 
     private final Circle circle;
     private final int size;
-    private final int offset;
 
     /**
      * Creates a ball with given size, position, and color.
@@ -18,7 +17,6 @@ public final class Ball implements Runnable {
      */
     public Ball(final int size, final int xPos, final int yPos, String color) {
         this.size = size;
-        this.offset = 5 + (int) (Math.random() * 5); // Random fall speed
         this.circle = new Circle(xPos, yPos, size, color); // Ensure circle is initialized
         Canvas.getCanvas().draw(circle, color, new java.awt.geom.Ellipse2D.Double(circle.getX(), circle.getY(), size, size));
     }
@@ -31,6 +29,7 @@ public final class Ball implements Runnable {
         // Continue moving the ball until it reaches the ground
         while (circle.getY() + size < groundLevel) {
             circle.moveVertical(speed); // Update vertical position of the ball
+            circle.moveHorizontal(BallTask.gravityGen())// Move ball 
             
             // Erase previous ball position and redraw it in the new position
             Canvas.getCanvas().erase(circle);  // Erase the ball from the old position
