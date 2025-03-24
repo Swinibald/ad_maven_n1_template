@@ -1,35 +1,40 @@
 package ch.hslu.ad.exercise.n1.balls;
 
-public class BallTask implements Runnable{
-    private String[] colorList = {"red", "black", "blue", "yellow", "green", "magenta"};
-    public BallTask(){
-        
-    }
-    
+public class BallTask implements Runnable {
+    private final String[] colorList = {"red", "black", "blue", "yellow", "green", "magenta"};
+
     @Override
     public void run() {
-        Ball ball = new Ball(sizeGen(), xPosGen(), yPosGen(), colorGen());
-    }
-    
-    public int sizeGen(){
-        return (int)(Math.random() * 31 + 10);
+        for (int i = 0; i < 10; i++) { // Generates 10 balls
+            Ball ball = new Ball(sizeGen(), xPosGen(), yPosGen(), colorGen());
+            Thread ballThread = new Thread(ball);
+            ballThread.start();
+
+            try {
+                Thread.sleep(500); // Small delay between ball creations
+            } catch (InterruptedException e) {
+                System.out.println("BallTask interrupted!");
+            }
+        }
     }
 
-    public int xPosGen(){
-        return (int)(Math.random() * 601);
-    }
-    
-    public int yPosGen(){
-        return (int)(Math.random() * 401);
+    static int sizeGen() {
+        return (int) (Math.random() * 31 + 20); // Random size between 20 and 50
     }
 
-    public String colorGen(){
-       return colorList[(int)(Math.random() * 6)];
+    private static int xPosGen() {
+        return (int) (Math.random() * 600); // X position within canvas width
     }
 
-    public int gravityGen(){
-        return (int)(Math.random() * 101);
+    private static int yPosGen() {
+        return (int) (Math.random() * 400); // Start at the top
     }
 
+    private String colorGen() {
+        return colorList[(int) (Math.random() * colorList.length)];
+    }
 
+    public static int gravityGen() {
+        return (int) (Math.random() * 5 + 5);
+    }
 }

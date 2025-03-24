@@ -208,9 +208,9 @@ public final class Canvas {
     }
 
     /**
-     * Redraw ell shapes currently on the Canvas.
+     * Redraw all shapes currently on the Canvas.
      */
-    private void redraw() {
+    void redraw() {
         erase();
         for (Object shape : objects) {
             shapes.get(shape).draw(graphic);

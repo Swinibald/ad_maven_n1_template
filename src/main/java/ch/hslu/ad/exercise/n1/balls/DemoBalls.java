@@ -27,11 +27,15 @@ public final class DemoBalls {
     }
 
     /**
-     * Main-Demo.
+     * Main-Demo
      *
      * @param args not used.
      */
+
     public static void main(final String[] args) {
-        final String[] color = {"red", "black", "blue", "yellow", "green", "magenta"};
+        Canvas.getCanvas(); // Initialize the canvas
+
+        Thread ballTaskThread = new Thread(new BallTask());
+        ballTaskThread.start();
     }
 }

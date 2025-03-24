@@ -62,13 +62,17 @@ public class Circle {
         return this.xPosition;
     }
 
+    public String getColor(){
+        return this.color;
+    }
+
     /**
      * Returns y-coordinate of the circle.
      *
      * @return y-coordinate of the circle.
      */
     public int getY() {
-        return yPosition;
+        return this.yPosition;
     }
 
     /**

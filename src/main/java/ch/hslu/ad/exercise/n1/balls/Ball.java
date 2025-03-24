@@ -1,23 +1,7 @@
-/*
- * Copyright 2025 Hochschule Luzern - Informatik.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package ch.hslu.ad.exercise.n1.balls;
 
-/**
- * Description of class Ball
- */
+
+
 public final class Ball implements Runnable {
 
     private final Circle circle;
@@ -25,21 +9,39 @@ public final class Ball implements Runnable {
     private final int offset;
 
     /**
-     * Erzeugt einen Ball mit gegebenen Parametern Grösse, Position und Farbe.
+     * Creates a ball with given size, position, and color.
      *
-     * @param size Grösse des Balls.
-     * @param xPos X-Position des Balls.
-     * @param yPos Y-Position des Balls.
-     * @param color Farbe des Balls.
+     * @param size Size of the ball.
+     * @param xPos X position of the ball.
+     * @param yPos Y position of the ball.
+     * @param color Color of the ball.
      */
     public Ball(final int size, final int xPos, final int yPos, String color) {
-        this.size = 0;
-        this.circle = null;
-        this.offset = 0;
+        this.size = size;
+        this.offset = 5 + (int) (Math.random() * 5); // Random fall speed
+        this.circle = new Circle(xPos, yPos, size, color); // Ensure circle is initialized
+        Canvas.getCanvas().draw(circle, color, new java.awt.geom.Ellipse2D.Double(circle.getX(), circle.getY(), size, size));
     }
-
+    
     @Override
     public void run() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int groundLevel = 400;
+        int speed = BallTask.gravityGen(); // Random fall speed
+        
+        // Continue moving the ball until it reaches the ground
+        while (circle.getY() + size < groundLevel) {
+            circle.moveVertical(speed); // Update vertical position of the ball
+            
+            // Erase previous ball position and redraw it in the new position
+            Canvas.getCanvas().erase(circle);  // Erase the ball from the old position
+            Canvas.getCanvas().draw(circle, circle.getColor(), new java.awt.geom.Ellipse2D.Double(circle.getX(), circle.getY(), size, size)); // Draw ball at new position
+            
+            Canvas.getCanvas().redraw(); // Force repaint to update the canvas with the new ball position
+            
+            Canvas.getCanvas().wait(50); // Small delay to control animation speed
+        }
+        
+        // Ball disappears after reaching the ground
+        Canvas.getCanvas().erase(circle);
     }
 }
