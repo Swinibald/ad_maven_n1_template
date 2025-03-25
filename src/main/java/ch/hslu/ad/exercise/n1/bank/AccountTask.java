@@ -39,7 +39,7 @@ public final class AccountTask implements Runnable {
 
     @Override
     public void run() {
-        for (int n = 0; n < amount; n++) {
+        for (int n = 0; n < (amount); n++) {
             source.transfer(target, 1);
         }
     }

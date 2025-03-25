@@ -1,4 +1,4 @@
-package ch.hslu.ad.exercise.n1.balls;
+package ch.hslu.ad.exercise.n1.vBalls;
 
 
 
