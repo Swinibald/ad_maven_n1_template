@@ -35,9 +35,9 @@ public class JoinAndSleepTask implements Runnable {
      * @param taskName der Name des Tasks.
      * @param sleepTime die Zeit in mSec die der Task schläft.
      */
-    public JoinAndSleepTask(final String taskName, final int sleepTime) {
+    public JoinAndSleepTask(final String taskName, final int sleepTime, Thread joinFor) {
         this.taskName = taskName;
-        this.joinFor = null;
+        this.joinFor = joinFor;
         this.sleepTime = sleepTime;
     }
 
@@ -47,6 +47,25 @@ public class JoinAndSleepTask implements Runnable {
      */
     @Override
     public void run() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        try {
+            if (joinFor != null) {
+                LOG.info("{} wartet auf {}", taskName, joinFor.getName());
+                joinFor.join();
+                
+            }
+            LOG.info("{} beginnt zu schlafen fuer {} ms", taskName, sleepTime);
+        } catch (InterruptedException e) {
+            LOG.info("{} wurde waehrend des Wartens unterbrochen!", taskName);
+            Thread.currentThread().interrupt();
+        }
+        try {
+            Thread.sleep(sleepTime); 
+            LOG.info("{} ist fertig", taskName);
+        } catch (InterruptedException e) {
+            LOG.info("{} wurde waehrend des Schlafens unterbrochen!", taskName);
+            Thread.currentThread().interrupt();
+            }
+        }
+
 }
+

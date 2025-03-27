@@ -53,17 +53,17 @@ public final class DemoBankAccount {
     public static void main(String[] args) throws InterruptedException {
         final ArrayList<BankAccount> source = new ArrayList<>();
         final ArrayList<BankAccount> target = new ArrayList<>();
-        final int amount = 100_000;
-        final int number = 5;
-        for (int i = 0; i < number; i++) {
-            source.add(new BankAccount(amount));
-            target.add(new BankAccount());
+        final int amount = 100_000; //Balance der Bankkonten
+        final int number = 5; // Anzahl Bankkonten
+        for (int i = 0; i < number; i++) { // erstellt die Bankkonten
+            source.add(new BankAccount(amount));// Startkonot mit Geld
+            target.add(new BankAccount()); // leeres Zielkonto
         }
         
-        final Thread[] threads = new Thread[number * 2];
+        final Thread[] threads = new Thread[number * 2];// array für die Threads 
         for (int i = 0; i < number; i++) {
-            threads[i] = new Thread(new AccountTask(source.get(i), target.get(i), amount));
-            threads[i + number] = new Thread(new AccountTask(target.get(i), source.get(i), amount));
+            threads[i] = new Thread(new AccountTask(source.get(i), target.get(i), amount)); // Überweisungen vom Start zum Zielkonto
+            threads[i + number] = new Thread(new AccountTask(target.get(i), source.get(i), amount));// Überweisungen zurück vom Ziel zum Startkonto
         }
 
         for (final Thread thread : threads) {

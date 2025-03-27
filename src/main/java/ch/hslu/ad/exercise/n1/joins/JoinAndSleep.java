@@ -16,6 +16,9 @@
 package ch.hslu.ad.exercise.n1.joins;
 
 import org.slf4j.LoggerFactory;
+
+import ch.hslu.ad.exercise.n1.bank.AccountTask;
+
 import org.slf4j.Logger;
 
 /**
@@ -38,6 +41,17 @@ public final class JoinAndSleep {
      * @throws InterruptedException wenn Warten unterbrochen wird.
      */
     public static void main(String[] args) throws InterruptedException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Thread t3 = new Thread(new JoinAndSleepTask("Thread3", 4000, null), "Thread3"); 
+        Thread t2 = new Thread(new JoinAndSleepTask("Thread2", 3000, t3), "Thread2"); 
+        Thread t1 = new Thread(new JoinAndSleepTask("Thread1", 2000,t2),"Thread1"); 
+        LOG.info("Start von Thread3");
+        t3.start();
+        LOG.info("Start von Thread2");
+        t2.start();
+        LOG.info("Start von Thread1");
+        t1.start();
+
+        // t2 unterbrechen zum Testen der Exception
+        //t2.interrupt();
     }
 }

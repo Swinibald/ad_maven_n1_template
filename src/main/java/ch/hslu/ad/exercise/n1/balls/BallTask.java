@@ -5,7 +5,7 @@ public class BallTask implements Runnable {
 
     @Override
     public void run() {
-        for (int i = 0; i < 10; i++) { // Generates 10 balls
+        for (int i = 0; i < 50; i++) { // Generates 10 balls
             Ball ball = new Ball(sizeGen(), xPosGen(), yPosGen(), colorGen()); //create new ball
             Thread ballThread = new Thread(ball);// create new ballThread
             ballThread.start();//start ball Thread

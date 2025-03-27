@@ -43,7 +43,7 @@ public final class Canvas {
     // shape identity and colors) is slightly more complex than necessary. This
     // is done on purpose to keep the interface and instance fields of the
     // shape objects in this project clean and simple for educational purposes.
-
+    
     private static Canvas canvasSingleton;
 
     /**
@@ -89,7 +89,6 @@ public final class Canvas {
         objects = new ArrayList<>();
         shapes = new HashMap<>();
     }
-
     /**
      * Return the canvas width.
      *
@@ -264,5 +263,6 @@ public final class Canvas {
             graphic.fill(shape);
         }
     }
-
+    
 }
+
