@@ -17,8 +17,6 @@ package ch.hslu.ad.exercise.n1.joins;
 
 import org.slf4j.LoggerFactory;
 
-import ch.hslu.ad.exercise.n1.bank.AccountTask;
-
 import org.slf4j.Logger;
 
 /**
@@ -52,6 +50,7 @@ public final class JoinAndSleep {
         t1.start();
 
         // t2 unterbrechen zum Testen der Exception
-        //t2.interrupt();
+        Thread.sleep(2000);
+        t2.interrupt();
     }
 }
