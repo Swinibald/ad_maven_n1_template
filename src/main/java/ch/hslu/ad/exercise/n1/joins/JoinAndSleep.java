@@ -50,7 +50,6 @@ public final class JoinAndSleep {
         t1.start();
 
         // t2 unterbrechen zum Testen der Exception
-        Thread.sleep(2000);
-        t2.interrupt();
+        //t2.interrupt();
     }
 }
