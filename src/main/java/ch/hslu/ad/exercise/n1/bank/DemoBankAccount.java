@@ -54,7 +54,7 @@ public final class DemoBankAccount {
         final ArrayList<BankAccount> source = new ArrayList<>();
         final ArrayList<BankAccount> target = new ArrayList<>();
         final int amount = 100_000; //Balance der Bankkonten
-        final int number = 5; // Anzahl Bankkonten
+        final int number = 100; // Anzahl Bankkonten
         for (int i = 0; i < number; i++) { // erstellt die Bankkonten
             source.add(new BankAccount(amount));// Startkonot mit Geld
             target.add(new BankAccount()); // leeres Zielkonto
